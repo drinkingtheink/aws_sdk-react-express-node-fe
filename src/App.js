@@ -7,12 +7,12 @@ state = {
   };
 
   componentDidMount() {
-    this.callBackendAPI()
+    this.getMostRecentLogs()
       .then(res => this.setState({ data: res.express }))
       .catch(err => console.log(err));
   }
   
-  callBackendAPI = async () => {
+  getMostRecentLogs = async () => {
     const response = await fetch('/get-logs');
     const body = await response.json();
 
