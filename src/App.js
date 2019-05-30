@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
 
 class App extends Component {
@@ -25,13 +25,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <EnvironmentDisplay />
-          <h2 className="App-title">D&B Configurable Log System</h2>
-        </header>
-        <p className="App-intro">{ this.state.data }</p>
-      </div>
+      <main className="App">
+        <EnvironmentDisplay />
+
+        <section className="log-display">
+          { this.state.data }
+        </section>
+      </main>
     );
   }
 }

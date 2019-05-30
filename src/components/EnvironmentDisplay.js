@@ -26,8 +26,7 @@ class EnvironmentDisplay extends Component {
   render() {
     return (
       <div className="environment-display">
-        <h3>{ this.state.company_name }</h3>
-        <h4>{ this.state.lambda_function }</h4>
+        <h3>{ this.state.lambda_function } for { this.state.company_name }</h3>
       </div>
     );
   }
