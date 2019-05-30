@@ -9,7 +9,7 @@ class EnvironmentDisplay extends Component {
 
   componentDidMount() {
     this.getEnvironmentDetails()
-      .then(res => this.setState({ company_name: res.company_name, company_duns: res.company_duns, lambda_function: res.lambda_function }))
+      .then(res => this.setState({ ...res }))
       .catch(err => console.log(err));
   }
 
