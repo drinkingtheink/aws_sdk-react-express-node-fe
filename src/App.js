@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import EnvironmentDisplay from './components/EnvironmentDisplay';
 
 class App extends Component {
-state = {
+  state = {
     data: null
   };
 
   componentDidMount() {
     this.getMostRecentLogs()
-      .then(res => this.setState({ data: res.express }))
+      .then(res => this.setState({ data: res.payload }))
       .catch(err => console.log(err));
   }
   
@@ -26,6 +27,7 @@ state = {
     return (
       <div className="App">
         <header className="App-header">
+          <EnvironmentDisplay />
           <h2 className="App-title">D&B Configurable Log System</h2>
         </header>
         <p className="App-intro">{ this.state.data }</p>
