@@ -1,1 +1,7 @@
 @import './styles/_base';
+@import './styles/_log_display';
+@import './styles/_environment_display';
+
+.App {
+	display: flex;
+}

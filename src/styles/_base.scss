@@ -1,3 +1,29 @@
+@import './_palette';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+html {
+	font-size: 26px/1.5;
+	font-family: 'Open Sans', sans-serif;
+}
+
 body {
-	
+	background-color: $gray_light;
+	position: relative;
+	padding: .5rem;
+}
+
+p {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	text-transform: uppercase;
 }
