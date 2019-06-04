@@ -5,22 +5,24 @@ import LogStream from './components/LogStream';
 
 class App extends Component {
   state = {
-    logs: null
+    logs: null,
+    error: null
   };
 
   componentDidMount() {
     this.getMostRecentLogs()
       .then(res => this.setState({ logs: res.payload }))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   }
   
   getMostRecentLogs = async () => {
     const response = await fetch('/get-logs');
     const body = await response.json();
 
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
+    if (body.hasOwnProperty("error")) {
+      alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
+    } 
+
     return body;
   };
 

@@ -7,6 +7,7 @@ class LogCard extends Component {
         <p><strong>Message:</strong> { this.props.log.message }</p>
         <p><strong>Occured:</strong> { this.props.log.timestamp }</p>
         <p><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
+        <p><strong>Log ID:</strong> { this.props.log.eventId }</p>
       </div>
     );
   }

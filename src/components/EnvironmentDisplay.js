@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from '../dnb_wordmark.svg';
 
 class EnvironmentDisplay extends Component {
   state = {
@@ -26,7 +27,11 @@ class EnvironmentDisplay extends Component {
   render() {
     return (
       <div className="environment-display">
-        <h3>{ this.state.lambda_function } for { this.state.company_name }</h3>
+      	<img src={ logo } alt="Dun and Bradstreet" />
+
+		{this.state.lambda_function && this.state.company_name &&
+	        <h3>{ this.state.lambda_function } for { this.state.company_name }</h3>
+    	}
       </div>
     );
   }
