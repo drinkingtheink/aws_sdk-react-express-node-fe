@@ -9,9 +9,11 @@ class LogCard extends Component {
           <Moment format="dddd, MMMM Do YYYY, h:mm:ss a" date={ this.props.log.timestamp } /> 
           <span className="log-event-timestamp__relative">(<Moment fromNow>{ this.props.log.timestamp }</Moment>)</span>
         </p>
-        <p className="log-event-message"><strong>Message:</strong> { this.props.log.message }</p>
-        <p><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
-        <p><strong>Log ID:</strong> { this.props.log.eventId }</p>
+        <main>
+          <p className="log-event-message"><strong>Message:</strong> { this.props.log.message }</p>
+          <p><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
+          <p><strong>Log ID:</strong> { this.props.log.eventId }</p>
+        </main>
       </div>
     );
   }
