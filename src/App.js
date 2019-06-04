@@ -12,7 +12,7 @@ class App extends Component {
   componentDidMount() {
     this.getMostRecentLogs()
       .then(res => this.setState({ logs: res.payload }))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
   
   getMostRecentLogs = async () => {

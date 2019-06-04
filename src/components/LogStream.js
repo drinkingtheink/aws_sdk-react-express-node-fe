@@ -5,7 +5,7 @@ class LogStream extends Component {
   render() {
     return (
       <div className="log-stream">
-        <h3>50 Most Recent Logs:</h3>
+        <h3>Most Recent Logs:</h3>
         {this.props.logs.map((log, index) => (
 	        <LogCard
 	          log={ log }
