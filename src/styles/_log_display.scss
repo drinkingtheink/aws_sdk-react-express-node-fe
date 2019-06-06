@@ -6,28 +6,65 @@
 
 .log-event {
 	background-color: white;
-	margin-bottom: .25rem;
+	margin-bottom: .5rem;
 	position: relative;
-	border-left: 5px solid $blue1;
+	border-left: 2px solid $blue1;
 	display: flex;
-
-	main {
-		padding: 0 .5rem 1rem .5rem;
-	}
+	max-width: 75vw;
 }
 
 .log-event-timestamp {
-	background-color: rgba($blue1, .5);
+	position: relative;
 	color: $blue3;
-	padding: .25rem 1rem;
+	padding: 1rem 1rem 1rem 2rem;
 	margin: 0;
 	font-weight: 600;
 	width: 12em;
 }
 
+.log-event-timestamp:after, .log-event-timestamp:before {
+	left: 0;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+$timestamp-arrow-dim: 10px;
+
+.log-event-timestamp:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: $blue1;
+	border-width: $timestamp-arrow-dim;
+	margin-top: -$timestamp-arrow-dim;
+}
+
 .log-event-timestamp__relative {
-	margin-left: .5rem;
-	color: $gray_light;
 	text-transform: uppercase;
 	display: block;
+	margin: .5rem 0;
+	padding-bottom: .5rem;
+	color: $blue2;
+	border-bottom: 1px solid rgba($blue2, .25);
+
+}
+
+.log-event-meta {
+	width: 75%;
+	padding: 0 .5rem 1rem .5rem;
+
+	p {
+		font-size: .8rem;
+	}
+}
+
+.log-event-message {
+	display: inline-block;
+	padding: .5rem;
+	border-radius: 4px;
+	background-color: $gray;
+	font-size: 1.25rem !important;
 }

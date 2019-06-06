@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
+import SearchLogs from './components/SearchLogs';
 import LogStream from './components/LogStream';
 
 class App extends Component {
@@ -30,11 +31,14 @@ class App extends Component {
     return (
       <main className="App">
         <EnvironmentDisplay />
-        <section className="log-display">
-          { this.state.logs && this.state.logs.length > 0
-            ? <LogStream logs={ this.state.logs } />
-            : null
-          }
+        <section className="logs-stage">
+            <SearchLogs />
+            <section className="log-display">
+              { this.state.logs && this.state.logs.length > 0
+                ? <LogStream logs={ this.state.logs } />
+                : null
+              }
+            </section>
         </section>
       </main>
     );

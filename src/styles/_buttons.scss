@@ -1,0 +1,18 @@
+@import './_palette';
+
+button {
+	padding: 1rem 2rem;
+	border-radius: 4px;
+	color: white;
+	text-transform: uppercase;
+	background-color: $blue1;
+	outline: 0;
+	border: 0;
+	transition: all .2s;
+	font-weight: bold;
+
+	&:hover {
+		background-color: $blue3;
+		cursor: pointer;
+	}
+}
