@@ -1,5 +1,3 @@
-@import './_palette';
-
 .log-display {
 
 }
@@ -67,4 +65,5 @@ $timestamp-arrow-dim: 10px;
 	border-radius: 4px;
 	background-color: $gray;
 	font-size: 1.25rem !important;
+	margin-bottom: 0;
 }

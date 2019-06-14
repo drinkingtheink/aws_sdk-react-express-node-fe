@@ -1,11 +1,15 @@
 import React, { Component } from "react";
+import Moment from "react-moment";
 import logo from '../dnb_wordmark.svg';
+
+const today = new Date();
 
 class EnvironmentDisplay extends Component {
   state = {
     company_name: null,
     company_duns: null,
-    lambda_function: null
+    lambda_function: null,
+    todaysDate: today
   };
 
   componentDidMount() {
@@ -27,11 +31,21 @@ class EnvironmentDisplay extends Component {
   render() {
     return (
       <div className="environment-display">
-      	<img src={ logo } alt="Dun and Bradstreet" />
+      	<img 
+          src={ logo } 
+          className="dnb_logo" 
+          alt="Dun and Bradstreet" 
+        />
 
-		{this.state.lambda_function && this.state.company_name &&
-	        <h3>{ this.state.lambda_function } for { this.state.company_name }</h3>
-    	}
+        <h3 className="todays-date"><Moment date={today} format="MMMM Do YYYY" /></h3>
+
+		    {this.state.lambda_function && this.state.company_name &&
+	        <section className="function-description">
+            <h3 className="section-label">Monitoring: </h3>
+            <h3 className="function-name">{ this.state.lambda_function }</h3>
+            <h4 className="function-attribution">for { this.state.company_name }</h4>
+          </section>
+    	  }
       </div>
     );
   }

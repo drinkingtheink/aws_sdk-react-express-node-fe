@@ -1,3 +1,32 @@
 .environment-display {
 	padding-right: 2rem;
+	width: 15vw;
+
+	.dnb_logo {
+		width: 60%;
+	}
+
+	.section-label {
+		margin: 0;
+	}
+
+	.function-attribution,
+	.function-name {
+		margin: 0;
+	}
+
+	.function-name {
+		color: $blue3;
+		padding-top: .5rem;
+		font-size: 1.75rem;
+	}
+
+	.function-attribution {
+		color: $blue2;
+		font-size: 1.25rem;
+	}
+
+	.todays-date {
+
+	}
 }

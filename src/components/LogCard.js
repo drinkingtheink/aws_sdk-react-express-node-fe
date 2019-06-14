@@ -7,7 +7,8 @@ class LogCard extends Component {
       <div className="log-event">
         <p className="log-event-timestamp"> 
           <span className="log-event-timestamp__relative"><Moment fromNow>{ this.props.log.timestamp }</Moment></span>
-          <Moment format="dddd, MMMM Do YYYY, h:mm:ss a" date={ this.props.log.timestamp } /> 
+          <Moment format="dddd, MMMM Do YYYY" date={ this.props.log.timestamp } /> 
+          <Moment format="h:mm:ss a" date={ this.props.log.timestamp } /> 
         </p>
         <main className="log-event-meta">
           <p className="log-event-message">{ this.props.log.message }</p>
