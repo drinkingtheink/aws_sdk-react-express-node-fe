@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
-import SearchLogs from './components/SearchLogs';
+import SearchLogs from './containers/SearchLogs';
 import LogStream from './components/LogStream';
 
 class App extends Component {

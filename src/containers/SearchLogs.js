@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import BrowseLogSearchResults from './BrowseLogSearchResults';
+import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
 
 class SearchLogs extends Component {
   constructor(props) {
     super(props);
+    this.logSearchInput = React.createRef();
     this.state = {
       searchTerm: null,
       searchPending: false,
@@ -12,11 +13,21 @@ class SearchLogs extends Component {
     };
     this.searchLogs = this.searchLogs.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   onChange(event) {
     let safeTerm = event.target.value || null;
     this.setState({ searchTerm: safeTerm})
+  }
+
+  clearSearch() {
+    this.setState({
+      searchTerm: null,
+      searchPending: false,
+      results: null,
+      error: null
+    })
   }
 
   searchLogs = async () => {
@@ -40,23 +51,37 @@ class SearchLogs extends Component {
   };  
 
   render() {
+    let searchTermEntered = this.state.searchTerm !== null;
     let searchResultsFound = this.state.results && this.state.results.length > 0;
+    const noSearchTermMessage = '-- Enter your search term above and hit the button to being your search --';
+    const searchingMessage = '-- Searching Logs --'
+
     return (
       <main className="search-logs">
         <h3>Search Logs:</h3>
         <input 
           className="logs-search-input" 
           onChange={this.onChange}
+          ref={this.logSearchInput}
         />
         <button 
           className="log-search-button"
           onClick={this.searchLogs}
         >Search Logs</button>
 
+        { searchResultsFound || searchTermEntered
+          ? <button className="log-search-button" onClick={this.clearSearch}>Clear Search</button>
+          : null
+        }
 
         { searchResultsFound
           ? <BrowseLogSearchResults logSearchResults={this.state.results} />
-          : <p>-- Enter your search term above and hit the button to being your search --</p>
+          : null
+        }
+
+        { !searchResultsFound
+          ? <p className="feedback">{ this.state.searchPending ? searchingMessage : noSearchTermMessage }</p>
+          : null
         }
         
       </main>
