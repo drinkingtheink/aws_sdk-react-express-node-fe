@@ -13,4 +13,16 @@ button {
 		background-color: $blue3;
 		cursor: pointer;
 	}
+
+	&.secondary {
+		background-color: $blue2;
+
+		&:hover {
+			background-color: $blue1;
+		}
+	}
+
+	&.cls-action {
+		margin-right: .25rem;
+	}
 }

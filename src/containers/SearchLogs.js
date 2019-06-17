@@ -65,12 +65,12 @@ class SearchLogs extends Component {
           ref={this.logSearchInput}
         />
         <button 
-          className="log-search-button"
+          className="log-search-button cls-action"
           onClick={this.searchLogs}
         >Search Logs</button>
 
         { searchResultsFound || searchTermEntered
-          ? <button className="log-search-button" onClick={this.clearSearch}>Clear Search</button>
+          ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch}>Clear Search</button>
           : null
         }
 
