@@ -67,10 +67,11 @@ class SearchLogs extends Component {
         <button 
           className="log-search-button cls-action"
           onClick={this.searchLogs}
-        >Search Logs</button>
+          disabled={this.state.searchPending}
+        >Search</button>
 
         { searchResultsFound || searchTermEntered
-          ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch}>Clear Search</button>
+          ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch} disabled={this.state.searchPending ? true : false}>Clear Search</button>
           : null
         }
 

@@ -2,6 +2,10 @@
 	padding-right: 2rem;
 	width: 15vw;
 
+	@media screen and (max-width: 1000px) {
+	  width: 100%;
+	}
+
 	.dnb_logo {
 		width: 60%;
 	}
@@ -16,14 +20,15 @@
 	}
 
 	.function-name {
-		color: $blue3;
+		color: $gray_dark;
 		padding-top: .5rem;
-		font-size: 1.75rem;
+		font-size: 1.75em;
 	}
 
 	.function-attribution {
-		color: $blue2;
+		color: $gray_dark;
 		font-size: 1.25rem;
+		opacity: .8;
 	}
 
 	.todays-date {
