@@ -6,6 +6,10 @@
 	@media screen and (max-width: 1000px) {
 	  border-top: 1px solid $border;
 	}
+
+	.in-process-wrapper {
+		margin-top: 1rem;
+	}
 }
 
 .logs-search-input {
