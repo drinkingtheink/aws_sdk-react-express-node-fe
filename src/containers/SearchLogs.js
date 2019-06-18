@@ -3,6 +3,9 @@ import InProcessDisplay from '../components/InProcessDisplay';
 import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
 import UserFeedback from '../components/UserFeedback';
 
+const noSearchTermMessage = 'Enter your search term above and hit the button to being your search.';
+const searchingMessage = 'Searching Logs...'
+
 class SearchLogs extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +14,15 @@ class SearchLogs extends Component {
       searchTerm: null,
       searchPending: false,
       results: null,
-      error: null
+      error: null,
+      userFeedback: noSearchTermMessage
     };
     this.searchLogs = this.searchLogs.bind(this);
     this.onChange = this.onChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.digestSearchResults = this.digestSearchResults.bind(this);
+    this.handleSearchResultsFound = this.handleSearchResultsFound.bind(this);
+    this.handleNoSearchResultsFound = this.handleNoSearchResultsFound.bind(this);
   }
 
   onChange(event) {
@@ -28,12 +35,13 @@ class SearchLogs extends Component {
       searchTerm: null,
       searchPending: false,
       results: null,
-      error: null
+      error: false,
+      userFeedback: noSearchTermMessage
     })
   }
 
   searchLogs = async () => {
-    let readyToSearch = this.state.searchTerm && this.state.searchTerm.length > 0;
+    let readyToSearch = this.state.searchTerm && this.state.searchTerm.length > 1;
 
     if (readyToSearch) {
       this.setState({ searchPending: true});
@@ -43,20 +51,37 @@ class SearchLogs extends Component {
 
       if (body.hasOwnProperty("error")) {
         alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
-      } 
+      } else {
+        this.setState({ searchPending: false});
+        this.digestSearchResults(body.payload);
+      }
 
-      this.setState({ searchPending: false});
-      this.setState({ results: body.payload });
     } else {
       return;
     }
   };  
 
+  digestSearchResults (results) {
+    let resultSet = results || [];
+    let searchResultsFound = resultSet.length > 0;
+    if (searchResultsFound) {
+      this.handleSearchResultsFound(resultSet);
+    } else {
+      this.handleNoSearchResultsFound(resultSet);
+    }
+  }
+
+  handleNoSearchResultsFound () {
+    this.setState({ userFeedback: 'No results found for your search term. Please adjust your credentials.', error: true });
+  }
+
+  handleSearchResultsFound (resultSet) {
+    this.setState({ error: true, results: resultSet });
+  }
+
   render() {
     let searchTermEntered = this.state.searchTerm !== null;
     let searchResultsFound = this.state.results && this.state.results.length > 0;
-    const noSearchTermMessage = 'Enter your search term above and hit the button to being your search.';
-    const searchingMessage = 'Searching Logs...'
 
     return (
       <main className="search-logs">
@@ -82,8 +107,13 @@ class SearchLogs extends Component {
           : null
         }
 
-        { !searchResultsFound && !this.state.searchPending
+        { !searchResultsFound && !this.state.searchPending && !this.state.error
           ? <UserFeedback key={this.state.searchPending ? 'pending' : 'resolved'} message={ this.state.searchPending ? searchingMessage : noSearchTermMessage } />
+          : null
+        }
+
+        { this.state.error
+          ? <UserFeedback key="no-results-found-error" message="No results found for your current search. Please try a different term." />
           : null
         }
 
