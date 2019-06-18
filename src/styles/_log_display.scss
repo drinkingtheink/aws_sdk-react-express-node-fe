@@ -1,5 +1,7 @@
-.log-display {
-
+.logs-stage {
+	@media screen and (max-width: $small_screen) {
+	  padding: 0 1rem;
+	}
 }
 
 .log-event {

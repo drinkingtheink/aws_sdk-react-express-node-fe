@@ -1,9 +1,16 @@
 .environment-display {
-	padding-right: 2rem;
+	padding: 1rem;
 	width: 15vw;
+	background-color: rgba(white, .8);
+	margin-right: 2rem;
+	border: 1px solid $border;
+	box-shadow: 0 0 5px rgba(black, .2);
+	height: 100vh;
+	border-top: 3px solid $blue3;
 
-	@media screen and (max-width: 1000px) {
+	@media screen and (max-width: $small_screen) {
 	  width: 100%;
+	  height: auto;
 	}
 
 	.dnb_logo {
