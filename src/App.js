@@ -3,18 +3,26 @@ import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
 import SearchLogs from './containers/SearchLogs';
 import LogStream from './components/LogStream';
+import InProcessDisplay from './components/InProcessDisplay';
+import UserFeedback from './components/UserFeedback';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       logs: null,
-      error: null
+      error: null,
+      searchPending: false,
+      searchPerformed: false,
+      userFeedback: ''
     };
-    this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.stopSearchPending = this.stopSearchPending.bind(this);
+    this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
+    this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
   }
   
   getMostRecentLogs = async () => {
+    this.startSearchPending();
     const response = await fetch('/get-most-recent-logs');
     const body = await response.json();
 
@@ -25,10 +33,39 @@ class App extends Component {
     return body;
   };
 
-  handleSearchClick () {
+  digestMostRecentLogsResult(logs) {
+    let logGroup = logs || [];
+    let logsFound = logGroup.length !== undefined;
+
+    if (logsFound) {
+      this.handleLogsFoundSuccessfully(logGroup);
+    } else {
+      this.handleNoLogsFound();
+    }
+
+    this.setState({ searchPerformed: true });
+  }
+
+  handleLogsFoundSuccessfully() {
+    // this.setState({ logs: res.payload })
+  }
+
+  handleNoLogsFound() {
+    this.setState({ userFeedback: 'No recent logs found.', searchPending: false });
+  }
+
+  componentDidMount() {
     this.getMostRecentLogs()
-      .then(res => this.setState({ logs: res.payload }))
+      .then(body => this.digestMostRecentLogsResult(body))
       .catch(err => console.log(err));
+  }
+
+  startSearchPending() {
+    this.setState({ searchPending: true });
+  }
+
+  stopSearchPending() {
+    this.setState({ searchPending: false });
   }
 
   render() {
@@ -41,11 +78,19 @@ class App extends Component {
             <SearchLogs />
             <section className="log-display">
               <h3>Most Recent Logs:</h3>
+              { this.state.searchPending
+                ? <InProcessDisplay />
+                : null
+              }
               { logsAvailable
                 ? <LogStream logs={ this.state.logs } />
-                : <button className="search-recent-logs" onClick={this.handleSearchClick}>Get Most Recent Logs</button>
+                : null
               }
             </section>
+            { this.state.userFeedback
+              ? <UserFeedback message={this.state.userFeedback} />
+              : null
+            }
         </section>
       </main>
     );

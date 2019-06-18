@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InProcessDisplay from '../components/InProcessDisplay';
 import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
 
 class SearchLogs extends Component {
@@ -82,6 +83,11 @@ class SearchLogs extends Component {
 
         { !searchResultsFound
           ? <p className="feedback">{ this.state.searchPending ? searchingMessage : noSearchTermMessage }</p>
+          : null
+        }
+
+        { this.state.searchPending
+          ? <InProcessDisplay />
           : null
         }
         
