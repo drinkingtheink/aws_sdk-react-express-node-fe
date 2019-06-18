@@ -23,19 +23,24 @@
 		color: $gray_dark;
 		padding-top: .5rem;
 		font-size: 1.75em;
+		margin-bottom: -.25rem;
 	}
 
 	.function-attribution {
 		color: $gray_dark;
 		font-size: 1.25rem;
-		opacity: .8;
+		opacity: .5;
 	}
 
 	.todays-date {
-		font-size: .8rem;
+		font-size: $smaller_font;
 		border-top: 1px solid $border;
 		border-bottom: 1px solid $border;
 		margin: .5rem 0;
 		padding: .5rem 0;
+	}
+
+	.section-label {
+		font-size: $smaller_font;
 	}
 }

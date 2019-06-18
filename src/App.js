@@ -8,8 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    logs: null,
-    error: null
+      logs: null,
+      error: null
     };
     this.handleSearchClick = this.handleSearchClick.bind(this);
   }
@@ -40,6 +40,7 @@ class App extends Component {
         <section className="logs-stage">
             <SearchLogs />
             <section className="log-display">
+              <h3>Most Recent Logs:</h3>
               { logsAvailable
                 ? <LogStream logs={ this.state.logs } />
                 : <button className="search-recent-logs" onClick={this.handleSearchClick}>Get Most Recent Logs</button>
