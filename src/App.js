@@ -13,7 +13,6 @@ class App extends Component {
       logs: null,
       error: null,
       searchPending: false,
-      searchPerformed: false,
       userFeedback: ''
     };
     this.stopSearchPending = this.stopSearchPending.bind(this);
@@ -42,8 +41,6 @@ class App extends Component {
     } else {
       this.handleNoLogsFound();
     }
-
-    this.setState({ searchPerformed: true });
   }
 
   handleLogsFoundSuccessfully() {
@@ -54,18 +51,18 @@ class App extends Component {
     this.setState({ userFeedback: 'No recent logs found.', searchPending: false });
   }
 
-  componentDidMount() {
-    this.getMostRecentLogs()
-      .then(body => this.digestMostRecentLogsResult(body))
-      .catch(err => console.log(err));
-  }
-
   startSearchPending() {
     this.setState({ searchPending: true });
   }
 
   stopSearchPending() {
     this.setState({ searchPending: false });
+  }
+
+  componentDidMount() {
+    this.getMostRecentLogs()
+      .then(body => this.digestMostRecentLogsResult(body))
+      .catch(err => console.log(err));
   }
 
   render() {
