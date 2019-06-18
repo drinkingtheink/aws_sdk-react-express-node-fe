@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InProcessDisplay from '../components/InProcessDisplay';
 import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
+import UserFeedback from '../components/UserFeedback';
 
 class SearchLogs extends Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class SearchLogs extends Component {
   render() {
     let searchTermEntered = this.state.searchTerm !== null;
     let searchResultsFound = this.state.results && this.state.results.length > 0;
-    const noSearchTermMessage = '-- Enter your search term above and hit the button to being your search --';
-    const searchingMessage = '-- Searching Logs --'
+    const noSearchTermMessage = 'Enter your search term above and hit the button to being your search.';
+    const searchingMessage = 'Searching Logs...'
 
     return (
       <main className="search-logs">
@@ -81,8 +82,8 @@ class SearchLogs extends Component {
           : null
         }
 
-        { !searchResultsFound
-          ? <p className="feedback">{ this.state.searchPending ? searchingMessage : noSearchTermMessage }</p>
+        { !searchResultsFound && !this.state.searchPending
+          ? <UserFeedback key={this.state.searchPending ? 'pending' : 'resolved'} message={ this.state.searchPending ? searchingMessage : noSearchTermMessage } />
           : null
         }
 
