@@ -45,10 +45,12 @@ class App extends Component {
 
   handleLogsFoundSuccessfully(logGroup) {
     this.setState({ logs: logGroup });
+    this.stopSearchPending();
   }
 
   handleNoLogsFound() {
     this.setState({ userFeedback: 'No recent logs found.', searchPending: false });
+    this.stopSearchPending();
   }
 
   startSearchPending() {
