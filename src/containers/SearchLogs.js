@@ -3,7 +3,7 @@ import InProcessDisplay from '../components/InProcessDisplay';
 import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
 import UserFeedback from '../components/UserFeedback';
 
-const noSearchTermMessage = 'Enter your search term above and hit the button to being your search.';
+const noSearchTermMessage = 'Enter your search term above and hit the button to begin your search.';
 const searchingMessage = 'Searching Logs...'
 
 class SearchLogs extends Component {
