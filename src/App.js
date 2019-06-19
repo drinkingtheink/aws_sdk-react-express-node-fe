@@ -29,12 +29,12 @@ class App extends Component {
       alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
     } 
 
-    return body;
+    return body.payload;
   };
 
   digestMostRecentLogsResult(logs) {
     let logGroup = logs || [];
-    let logsFound = logGroup.length !== undefined;
+    let logsFound = logGroup !== undefined;
 
     if (logsFound) {
       this.handleLogsFoundSuccessfully(logGroup);
@@ -43,8 +43,8 @@ class App extends Component {
     }
   }
 
-  handleLogsFoundSuccessfully() {
-    // this.setState({ logs: res.payload })
+  handleLogsFoundSuccessfully(logGroup) {
+    this.setState({ logs: logGroup });
   }
 
   handleNoLogsFound() {
