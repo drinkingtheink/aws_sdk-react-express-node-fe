@@ -10,6 +10,9 @@
 
 /** Structural Styles for Main Layout **/
 
+$scrollable-section-width: 80vw;
+$sidepanel-width: 100 - $scrollable-section-width;
+
 body, 
 html {
 	height: 100%;
@@ -25,13 +28,25 @@ html {
 	}
 
 	.environment-display {
+		width: $sidepanel-width;
 
+		@media screen and (max-width: $small_screen) {
+		  width: 100%;
+		  height: auto;
+		}
 	}
 
 	.logs-stage {
 		height: 100vh;
   		display: flex;
   		flex-direction: column;
+  		width: $scrollable-section-width;
+  		overflow-y: auto;
+
+  		@media screen and (max-width: $small_screen) {
+		  width: 100%;
+		  padding: 0 1rem;
+		}
 	}
 
 	.log-stream {

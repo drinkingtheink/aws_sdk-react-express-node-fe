@@ -12,8 +12,8 @@ class LogCard extends Component {
         </p>
         <main className="log-event-meta">
           <p className="log-event-message">{ this.props.log.message }</p>
-          <p><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
-          <p><strong>Log ID:</strong> { this.props.log.eventId }</p>
+          <p className="log-stream-display"><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
+          <p className="log-id-display"><strong>Log ID:</strong> { this.props.log.eventId }</p>
         </main>
       </div>
     );

@@ -1,20 +1,15 @@
-.logs-stage {
-	height: 100%;
-	overflow-y: auto;
-
-	@media screen and (max-width: $small_screen) {
-	  padding: 0 1rem;
-	}
-}
-
 .log-event {
 	background-color: white;
 	margin-bottom: .5rem;
 	position: relative;
 	border-left: 2px solid $blue1;
 	display: flex;
-	max-width: 65vw;
+	width: 65vw;
 	border: 1px solid $border;
+
+	@media screen and (max-width: $small_screen) {
+	  width: 95%;
+	}
 }
 
 .log-event-timestamp {
@@ -72,4 +67,11 @@ $timestamp-arrow-dim: 10px;
 	background-color: $gray;
 	font-size: 1.25rem !important;
 	margin-bottom: 0;
+}
+
+@media screen and (max-width: $small_screen) {
+  .log-stream-display,
+  .log-id-display {
+  	display: none;
+  }
 }
