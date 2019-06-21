@@ -1,4 +1,7 @@
 .logs-stage {
+	height: 100%;
+	overflow-y: auto;
+
 	@media screen and (max-width: $small_screen) {
 	  padding: 0 1rem;
 	}

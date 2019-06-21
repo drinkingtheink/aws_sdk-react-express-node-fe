@@ -8,10 +8,33 @@
 @import './styles/_loading_animation';
 @import './styles/_user_feedback';
 
+/** Structural Styles for Main Layout **/
+
+body, 
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
 .App {
 	display: flex;
+	flex: 1;
 
 	@media screen and (max-width: $small_screen) {
 	  display: block;
+	}
+
+	.environment-display {
+
+	}
+
+	.logs-stage {
+		height: 100vh;
+  		display: flex;
+  		flex-direction: column;
+	}
+
+	.log-stream {
+		flex: 2;
 	}
 }

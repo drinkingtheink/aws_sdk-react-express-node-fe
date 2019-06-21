@@ -78,25 +78,28 @@ class App extends Component {
         <EnvironmentDisplay />
         <section className="logs-stage">
             <SearchLogs />
-            <section className="log-display">
+            <section className="logs-browser">
               <h3>Most Recent Logs:</h3>
-              { this.state.searchPending
-                ? <InProcessDisplay />
-                : null
-              }
               { logsAvailable && this.state.searchMeta
-                ? <RecentLogsMetaDisplay logCount={ this.state.searchMeta.logCount } />
+                ? <RecentLogsMetaDisplay logCount={this.state.searchMeta.logCount} />
                 : null
               }
-              { logsAvailable
-                ? <LogStream logs={ this.state.logs } />
+              <section className="recent-log-display">
+                { this.state.searchPending
+                  ? <InProcessDisplay />
+                  : null
+                }
+
+                { logsAvailable
+                  ? <LogStream logs={this.state.logs} />
+                  : null
+                }
+              </section>
+              { this.state.userFeedback
+                ? <UserFeedback message={this.state.userFeedback} />
                 : null
               }
             </section>
-            { this.state.userFeedback
-              ? <UserFeedback message={this.state.userFeedback} />
-              : null
-            }
         </section>
       </main>
     );
