@@ -5,7 +5,7 @@ import SearchLogs from './containers/SearchLogs';
 import LogStream from './components/LogStream';
 import InProcessDisplay from './components/InProcessDisplay';
 import UserFeedback from './components/UserFeedback';
-import RecentLogsMetaDisplay from './components/RecentLogsMetaDisplay';
+import LogsMetaDisplay from './components/LogsMetaDisplay';
 
 class App extends Component {
   constructor(props) {
@@ -81,7 +81,7 @@ class App extends Component {
             <section className="logs-browser">
               <h3>Most Recent Logs:</h3>
               { logsAvailable && this.state.searchMeta
-                ? <RecentLogsMetaDisplay logCount={this.state.searchMeta.logCount} />
+                ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} />
                 : null
               }
               <section className="recent-log-display">

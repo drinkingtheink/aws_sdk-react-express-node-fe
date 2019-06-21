@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InProcessDisplay from '../components/InProcessDisplay';
 import BrowseLogSearchResults from '../components/BrowseLogSearchResults';
 import UserFeedback from '../components/UserFeedback';
+import LogsMetaDisplay from '../components/LogsMetaDisplay';
 
 const noSearchTermMessage = 'Enter your search term above and hit the button to begin your search.';
 const searchingMessage = 'Searching Logs...'
@@ -12,6 +13,7 @@ class SearchLogs extends Component {
     this.logSearchInput = React.createRef();
     this.state = {
       searchTerm: null,
+      searchedTerm: null,
       searchPending: false,
       results: null,
       error: null,
@@ -33,7 +35,9 @@ class SearchLogs extends Component {
   clearSearch() {
     this.setState({
       searchTerm: null,
+      searchedTerm: null,
       searchPending: false,
+      searchMeta: null,
       results: null,
       error: false,
       userFeedback: noSearchTermMessage
@@ -53,7 +57,7 @@ class SearchLogs extends Component {
         alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
       } else {
         this.setState({ searchPending: false});
-        this.digestSearchResults(body.payload);
+        this.digestSearchResults(body);
       }
 
     } else {
@@ -61,11 +65,12 @@ class SearchLogs extends Component {
     }
   };  
 
-  digestSearchResults (results) {
-    let resultSet = results || [];
+  digestSearchResults (searchResponse) {
+    let resultSet = searchResponse.payload || [];
+    let searchMeta = searchResponse.meta || {};
     let searchResultsFound = resultSet.length > 0;
     if (searchResultsFound) {
-      this.handleSearchResultsFound(resultSet);
+      this.handleSearchResultsFound(resultSet, searchMeta);
     } else {
       this.handleNoSearchResultsFound(resultSet);
     }
@@ -75,8 +80,8 @@ class SearchLogs extends Component {
     this.setState({ userFeedback: 'No results found for your search term. Please adjust your credentials.', error: true });
   }
 
-  handleSearchResultsFound (resultSet) {
-    this.setState({ error: true, results: resultSet });
+  handleSearchResultsFound (resultSet, searchMeta) {
+    this.setState({ results: resultSet, searchMeta: searchMeta });
   }
 
   render() {
@@ -99,6 +104,11 @@ class SearchLogs extends Component {
 
         { searchResultsFound || searchTermEntered
           ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch} disabled={this.state.searchPending ? true : false}>Clear Search</button>
+          : null
+        }
+
+        { this.state.searchMeta
+          ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} searchedTerm={this.state.searchMeta.searchedTerm} />
           : null
         }
 
