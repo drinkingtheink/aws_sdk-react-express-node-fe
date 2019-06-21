@@ -3,4 +3,8 @@
 	background: rgba($blue1, .1);
 	border: 1px solid $border;
 	border-left: 3px solid $blue2;
+
+	&.warning {
+		border-left-color: $yellow;
+	}
 }

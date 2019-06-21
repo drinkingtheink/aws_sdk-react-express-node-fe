@@ -5,6 +5,7 @@ import SearchLogs from './containers/SearchLogs';
 import LogStream from './components/LogStream';
 import InProcessDisplay from './components/InProcessDisplay';
 import UserFeedback from './components/UserFeedback';
+import RecentLogsMetaDisplay from './components/RecentLogsMetaDisplay';
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends Component {
       logs: null,
       error: null,
       searchPending: false,
+      searchMeta: null,
       userFeedback: ''
     };
     this.stopSearchPending = this.stopSearchPending.bind(this);
@@ -29,22 +31,23 @@ class App extends Component {
       alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
     } 
 
-    return body.payload;
+    return body;
   };
 
-  digestMostRecentLogsResult(logs) {
-    let logGroup = logs || [];
+  digestMostRecentLogsResult(searchResults) {
+    let logMeta = searchResults.meta || {};
+    let logGroup = searchResults.payload || [];
     let logsFound = logGroup !== undefined;
 
     if (logsFound) {
-      this.handleLogsFoundSuccessfully(logGroup);
+      this.handleLogsFoundSuccessfully(logGroup, logMeta);
     } else {
       this.handleNoLogsFound();
     }
   }
 
-  handleLogsFoundSuccessfully(logGroup) {
-    this.setState({ logs: logGroup });
+  handleLogsFoundSuccessfully(logGroup, logMeta) {
+    this.setState({ logs: logGroup, searchMeta: logMeta });
     this.stopSearchPending();
   }
 
@@ -79,6 +82,10 @@ class App extends Component {
               <h3>Most Recent Logs:</h3>
               { this.state.searchPending
                 ? <InProcessDisplay />
+                : null
+              }
+              { logsAvailable && this.state.searchMeta
+                ? <RecentLogsMetaDisplay logCount={ this.state.searchMeta.logCount } />
                 : null
               }
               { logsAvailable
