@@ -8,7 +8,11 @@
 	border-top: 3px solid $blue3;
 
 	.dnb_logo {
-		width: 60%;
+		max-width: 65%;
+
+		@media screen and (max-width: $small_screen) {
+		  width: 25%;
+		}
 	}
 
 	.section-label {
