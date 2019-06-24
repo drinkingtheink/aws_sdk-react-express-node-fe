@@ -1,14 +1,17 @@
 import React from 'react';
 
-const LogsMetaDisplay = ({ logCount = 0, searchedTerm = null}) => {
+const LogsMetaDisplay = ({ logCount = 0, searchedTerm = null, searchStartTime = null}) => {
 	return(
-		<section className="recent-logs-meta">
-			<p><strong>{logCount}</strong> Recent Logs Found</p>
+		<section className="logs-meta-display">
+			<p className="meta-field"><strong>{logCount}</strong> Logs Found</p>
 			{ searchedTerm 
-				? <p>Searching for <strong>"{searchedTerm}"</strong></p>
+				? <p className="meta-field">Searching for <strong>"{searchedTerm}"</strong></p>
 				: null
 			}
-			
+			{ searchStartTime 
+				? <p className="meta-field">Starting from: <strong>{searchStartTime}</strong></p>
+				: null
+			}
 		</section>
 	)
 }

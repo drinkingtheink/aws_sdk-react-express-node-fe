@@ -81,7 +81,7 @@ class App extends Component {
             <section className="logs-browser">
               <h3>Most Recent Logs:</h3>
               { logsAvailable && this.state.searchMeta
-                ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} />
+                ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} searchStartTime={this.state.searchMeta.searchStartTime} />
                 : null
               }
               <section className="recent-log-display">
