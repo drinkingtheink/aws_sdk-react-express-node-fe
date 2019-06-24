@@ -48,7 +48,7 @@ class SearchLogs extends Component {
     let readyToSearch = this.state.searchTerm && this.state.searchTerm.length > 1;
 
     if (readyToSearch) {
-      this.setState({ searchPending: true});
+      this.setState({ searchPending: true, results: null});
       const searchTerm = this.state.searchTerm || null;
       const response = await fetch(`/search-logs/${searchTerm}`);
       const body = await response.json();
