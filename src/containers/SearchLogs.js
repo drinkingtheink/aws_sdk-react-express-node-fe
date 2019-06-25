@@ -139,7 +139,7 @@ class SearchLogs extends Component {
             : null
           }
 
-          { this.state.error
+          { this.state.error && !this.state.searchPending
             ? <UserFeedback key="no-results-found-error" message="No results found for your current search. Please try a different term." />
             : null
           }
