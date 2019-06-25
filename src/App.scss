@@ -52,4 +52,12 @@ html {
 	.log-stream {
 		flex: 2;
 	}
+
+	.layout-panel {
+		max-width: 55vw;
+
+		@media screen and (max-width: $medium_screen) {
+		  max-width: 95%;
+		}
+	}
 }

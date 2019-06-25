@@ -4,7 +4,7 @@ import LogCard from './LogCard';
 class LogStream extends Component {
   render() {
     return (
-      <div className="log-stream">
+      <div className="log-stream layout-panel">
         {this.props.logs.map((log, index) => (
 	        <LogCard
 	          log={ log }
