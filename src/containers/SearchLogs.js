@@ -22,6 +22,8 @@ class SearchLogs extends Component {
     this.searchLogs = this.searchLogs.bind(this);
     this.onChange = this.onChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.clearLogSearchInput = this.clearLogSearchInput.bind(this);
+    this.focusLogSearchInput = this.focusLogSearchInput.bind(this);
     this.digestSearchResults = this.digestSearchResults.bind(this);
     this.handleSearchResultsFound = this.handleSearchResultsFound.bind(this);
     this.handleNoSearchResultsFound = this.handleNoSearchResultsFound.bind(this);
@@ -42,6 +44,7 @@ class SearchLogs extends Component {
       error: false,
       userFeedback: noSearchTermMessage
     })
+    this.clearLogSearchInput();
   }
 
   searchLogs = async () => {
@@ -82,6 +85,15 @@ class SearchLogs extends Component {
 
   handleSearchResultsFound (resultSet, searchMeta) {
     this.setState({ results: resultSet, searchMeta: searchMeta });
+  }
+
+  clearLogSearchInput() {
+    this.logSearchInput.current.value = '';
+    this.focusLogSearchInput();
+  }
+
+  focusLogSearchInput() {
+    this.logSearchInput.current.focus();
   }
 
   render() {
