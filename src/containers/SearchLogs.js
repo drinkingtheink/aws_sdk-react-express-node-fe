@@ -96,6 +96,10 @@ class SearchLogs extends Component {
     this.logSearchInput.current.focus();
   }
 
+  componentDidMount() {
+    this.focusLogSearchInput();
+  }
+
   render() {
     let searchTermEntered = this.state.searchTerm !== null;
     let searchResultsFound = this.state.results && this.state.results.length > 0;
