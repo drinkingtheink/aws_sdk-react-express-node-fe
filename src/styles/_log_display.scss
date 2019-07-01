@@ -66,6 +66,8 @@ $timestamp-arrow-dim: 10px;
 	background-color: $gray;
 	font-size: 1.25rem !important;
 	margin-bottom: 0;
+	white-space: pre-wrap;
+	width: 95%;
 }
 
 @media screen and (max-width: $small_screen) {

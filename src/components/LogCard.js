@@ -11,7 +11,7 @@ class LogCard extends Component {
           <Moment format="h:mm:ss a" date={ this.props.log.timestamp } /> 
         </p>
         <main className="log-event-meta">
-          <p className="log-event-message">{ this.props.log.message }</p>
+          <p className="log-event-message">{ this.props.log.message.replace(/\t/g, '\n') }</p>
           <p className="log-stream-display"><strong>Log Stream:</strong> { this.props.log.logStreamName }</p>
           <p className="log-id-display"><strong>Log ID:</strong> { this.props.log.eventId }</p>
         </main>
