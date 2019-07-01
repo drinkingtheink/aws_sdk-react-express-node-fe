@@ -72,6 +72,7 @@ class SearchLogs extends Component {
     let resultSet = searchResponse.payload || [];
     let searchMeta = searchResponse.meta || {};
     let searchResultsFound = resultSet.length > 0;
+    
     if (searchResultsFound) {
       this.handleSearchResultsFound(resultSet, searchMeta);
     } else {
