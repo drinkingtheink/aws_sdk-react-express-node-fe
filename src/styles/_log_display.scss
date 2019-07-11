@@ -1,10 +1,9 @@
 .log-event {
+	@include appBoxShadow();
 	background-color: white;
 	margin-bottom: .5rem;
 	position: relative;
-	border-left: 2px solid $blue1;
 	display: flex;
-	border: 1px solid $border;
 
 	@media screen and (max-width: $small_screen) {
 	  width: 95%;
@@ -18,26 +17,7 @@
 	margin: 0;
 	font-weight: 600;
 	width: 12em;
-}
-
-.log-event-timestamp:after, .log-event-timestamp:before {
-	left: 0;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-$timestamp-arrow-dim: 10px;
-
-.log-event-timestamp:after {
-	border-color: rgba(136, 183, 213, 0);
-	border-left-color: $blue1;
-	border-width: $timestamp-arrow-dim;
-	margin-top: -$timestamp-arrow-dim;
+	border-left: 3px solid $blue2;
 }
 
 .log-event-timestamp__relative {
@@ -47,7 +27,6 @@ $timestamp-arrow-dim: 10px;
 	padding-bottom: .5rem;
 	color: $blue2;
 	border-bottom: 1px solid rgba($blue2, .25);
-
 }
 
 .log-event-meta {

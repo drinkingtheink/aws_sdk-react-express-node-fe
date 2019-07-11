@@ -1,9 +1,9 @@
 .environment-display {
+	@include appBoxShadow();
 	padding: 1rem;
 	background-color: rgba(white, .8);
 	margin-right: 2rem;
 	border: 1px solid $border;
-	box-shadow: 0 0 5px rgba(black, .2);
 	height: 100vh;
 	border-top: 3px solid $blue3;
 
