@@ -8,8 +8,8 @@ class EnvironmentDisplay extends Component {
   state = {
     company_name: null,
     company_duns: null,
-    lambda_function: null,
-    todaysDate: today
+    app_name: null,
+    todays_date: today
   };
 
   componentDidMount() {
@@ -37,12 +37,12 @@ class EnvironmentDisplay extends Component {
           alt="Dun and Bradstreet" 
         />
 
-        <h3 className="todays-date"><Moment date={today} format="MMMM Do YYYY" /></h3>
+        <h3 className="todays-date"><Moment date={ today } format="MMMM Do YYYY" /></h3>
 
-		    {this.state.lambda_function && this.state.company_name &&
+		    {this.state.app_name && this.state.company_name &&
 	        <section className="function-description">
             <h3 className="section-label">Monitoring: </h3>
-            <h3 className="function-name">{ this.state.lambda_function }</h3>
+            <h3 className="function-name">{ this.state.app_name }</h3>
             <h4 className="function-attribution">for { this.state.company_name }</h4>
           </section>
     	  }

@@ -8,10 +8,6 @@ const LogsMetaDisplay = ({ logCount = 0, searchedTerm = null, searchStartTime = 
 				? <p className="meta-field">Searching for <strong>"{searchedTerm}"</strong></p>
 				: null
 			}
-			{ searchStartTime 
-				? <p className="meta-field">Starting from: <strong>{searchStartTime}</strong></p>
-				: null
-			}
 		</section>
 	)
 }

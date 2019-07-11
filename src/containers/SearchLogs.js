@@ -53,7 +53,8 @@ class SearchLogs extends Component {
     if (readyToSearch) {
       this.setState({ searchPending: true, results: null});
       const searchTerm = this.state.searchTerm || null;
-      const response = await fetch(`/search-logs/${searchTerm}`);
+      const encodedSearchTerm = encodeURI(searchTerm);
+      const response = await fetch(`/search-logs/${encodedSearchTerm}`);
       const body = await response.json();
 
       if (body.hasOwnProperty("error")) {
@@ -76,11 +77,12 @@ class SearchLogs extends Component {
     if (searchResultsFound) {
       this.handleSearchResultsFound(resultSet, searchMeta);
     } else {
-      this.handleNoSearchResultsFound(resultSet);
+      this.handleNoSearchResultsFound(searchMeta);
     }
   }
 
-  handleNoSearchResultsFound () {
+  handleNoSearchResultsFound (searchMeta) {
+    this.setState({ searchMeta: searchMeta });
     this.setState({ userFeedback: 'No results found for your search term. Please adjust your credentials.', error: true });
   }
 
@@ -140,7 +142,7 @@ class SearchLogs extends Component {
             : null
           }
 
-          { this.state.error && !this.state.searchPending
+          { this.state.error && !this.state.searchPending && !searchResultsFound
             ? <UserFeedback key="no-results-found-error" message="No results found for your current search. Please try a different term." />
             : null
           }
