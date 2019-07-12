@@ -111,21 +111,25 @@ class SearchLogs extends Component {
       <section className="search-logs">
         <main className="layout-panel">
           <h3>Search Logs:</h3>
-          <input 
-            className="logs-search-input" 
-            onChange={this.onChange}
-            ref={this.logSearchInput}
-          />
-          <button 
-            className="log-search-button cls-action"
-            onClick={this.searchLogs}
-            disabled={this.state.searchPending}
-          >Search</button>
+          <form id="log-search-form">
+            <input 
+              className="logs-search-input" 
+              onChange={this.onChange}
+              ref={this.logSearchInput}
+            />
+            <button 
+              className="log-search-button cls-action"
+              onClick={this.searchLogs}
+              disabled={this.state.searchPending}
+              type="submit"
+            >Search</button>
+          
+            { searchResultsFound || searchTermEntered
+              ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch} disabled={this.state.searchPending ? true : false}>Clear Search</button>
+              : null
+            }
 
-          { searchResultsFound || searchTermEntered
-            ? <button className="clear-search-button secondary cls-action" onClick={this.clearSearch} disabled={this.state.searchPending ? true : false}>Clear Search</button>
-            : null
-          }
+          </form>
 
           { this.state.searchMeta
             ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} searchedTerm={this.state.searchMeta.searchedTerm} />
