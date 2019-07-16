@@ -58,15 +58,14 @@ class SearchLogs extends Component {
       const body = await response.json();
 
       if (body.hasOwnProperty("error")) {
-        alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
+        this.setState({ searchPending: false, userFeedback: body});
       } else {
         this.setState({ searchPending: false});
         this.digestSearchResults(body);
       }
-
-    } else {
-      return;
-    }
+    } 
+    
+    return;
   };  
 
   digestSearchResults (searchResponse) {

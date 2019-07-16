@@ -15,13 +15,17 @@ class App extends Component {
       error: null,
       searchPending: false,
       searchMeta: null,
-      userFeedback: ''
+      userFeedback: '',
+      logPanels: [],
+      appName: null,
+      companyName: null
     };
     this.stopSearchPending = this.stopSearchPending.bind(this);
     this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
     this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
   }
   
+  // Logs -->
   getMostRecentLogs = async () => {
     this.startSearchPending();
     const response = await fetch('/get-most-recent-logs');
@@ -64,7 +68,23 @@ class App extends Component {
     this.setState({ searchPending: false });
   }
 
+  // Environment Details -->
+  getEnvironmentDetails = async () => {
+    const response = await fetch('/get-env');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message) 
+    }
+    return body;
+  };
+
+  // Lifecycle -->
   componentDidMount() {
+    this.getEnvironmentDetails()
+      .then(res => this.setState({ appName: res.app_name, companyName: res.company_name, logPanels: res.processes }))
+      .catch(err => console.log(err));
+
     this.getMostRecentLogs()
       .then(body => this.digestMostRecentLogsResult(body))
       .catch(err => console.log(err));
@@ -75,7 +95,11 @@ class App extends Component {
 
     return (
       <main className="App">
-        <EnvironmentDisplay />
+        <EnvironmentDisplay 
+          appName={this.state.appName}
+          companyName={this.state.companyName}
+          logPanels={this.state.logPanels}
+        />
         <section className="logs-stage">
             <SearchLogs />
             <section className="logs-browser">
