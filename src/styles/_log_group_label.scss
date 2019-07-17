@@ -1,0 +1,16 @@
+.log-group-label {
+	@include appBoxShadow();
+	text-align: center;
+	background: $blue1;
+	color: white;
+	padding: 1rem;
+	width: auto;
+	font-weight: bold;
+	font-size: 1em;
+	max-width: 35vw;
+	margin: 0 auto;
+	border-radius: 0 0 5px 5px;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}

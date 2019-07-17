@@ -77,13 +77,12 @@ class App extends Component {
       throw Error(body.message) 
     }
     
+    //  otherwise, compose nav items
     body.processes.forEach((process) => {
       process.active = false;
     });
     
     body.processes[0].active = true;
-
-    console.log(`ENV BODY >>>>>>>> ${JSON.stringify(body)}`);
     return body;
   };
 
@@ -100,6 +99,8 @@ class App extends Component {
 
   render() {
     const logsAvailable = this.state.logs && this.state.logs.length > 0;
+    const activeLogPanel = this.state.logPanels.find(function(panel) {return panel.active;});
+    const activeLogPanelFound = !!(activeLogPanel);
 
     return (
       <main className="App">
@@ -109,6 +110,11 @@ class App extends Component {
           logPanels={this.state.logPanels}
         />
         <section className="logs-stage">
+            { activeLogPanelFound
+              ? <section className="log-group-label"> {activeLogPanel.name}</section>
+              : null
+            }
+
             <SearchLogs />
             <section className="logs-browser">
               <h3>Most Recent Logs:</h3>
