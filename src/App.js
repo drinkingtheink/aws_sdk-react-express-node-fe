@@ -71,11 +71,19 @@ class App extends Component {
   // Environment Details -->
   getEnvironmentDetails = async () => {
     const response = await fetch('/get-env');
-    const body = await response.json();
+    let body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message) 
     }
+    
+    body.processes.forEach((process) => {
+      process.active = false;
+    });
+    
+    body.processes[0].active = true;
+
+    console.log(`ENV BODY >>>>>>>> ${JSON.stringify(body)}`);
     return body;
   };
 

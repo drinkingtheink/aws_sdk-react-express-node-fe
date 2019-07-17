@@ -25,7 +25,12 @@ const EnvironmentDisplay = (props) => {
       <nav className="cls-navigation">
        <h4>Monitoring:</h4>
         {props.logPanels.map((panel, index) => (
-          <article className="sidenav-item">{ panel.name }</article>
+          <article 
+            key={panel.name}
+            className={`sidenav-item ${panel.active ? 'active' : ''}`}
+          >            
+            { panel.name }
+          </article>
         ))}
       </nav>
     </div>
