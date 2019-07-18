@@ -6,6 +6,7 @@ import LogStream from './components/LogStream';
 import InProcessDisplay from './components/InProcessDisplay';
 import UserFeedback from './components/UserFeedback';
 import LogsMetaDisplay from './components/LogsMetaDisplay';
+import StickyHeader from './components/StickyHeader';
 
 class App extends Component {
   constructor(props) {
@@ -111,7 +112,7 @@ class App extends Component {
         />
         <section className="logs-stage">
             { activeLogPanelFound
-              ? <section className="log-group-label"> {activeLogPanel.name}</section>
+              ? <StickyHeader activeLogPanel={activeLogPanel} />
               : null
             }
 

@@ -1,7 +1,7 @@
-.log-group-label {
+.log-group-sticky-header {
 	@include appBoxShadow();
 	text-align: center;
-	background: $blue1;
+	background: $blue3;
 	color: white;
 	padding: 1rem;
 	width: auto;
@@ -9,6 +9,7 @@
 	font-size: 1em;
 	max-width: 35vw;
 	margin: 0 auto;
+	text-transform: uppercase;
 	border-radius: 0 0 5px 5px;
 	position: sticky;
 	top: 0;

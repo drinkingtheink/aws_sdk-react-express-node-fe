@@ -22,6 +22,10 @@
 		&.active {
 			color: $blue1;
 			opacity: 1;
+
+			&:hover {
+				background: transparent;
+			}
 		}
 	}
 }
