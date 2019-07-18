@@ -3,7 +3,7 @@ button {
 	border-radius: 4px;
 	color: white;
 	text-transform: uppercase;
-	background-color: $blue1;
+	background-color: $blue2;
 	outline: 0;
 	border: 0;
 	transition: all .2s;
@@ -17,10 +17,10 @@ button {
 	}
 
 	&.secondary {
-		background-color: $blue2;
+		background-color: $blue1;
 
 		&:hover {
-			background-color: $blue1;
+			background-color: $blue3;
 		}
 	}
 
