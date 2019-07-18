@@ -24,6 +24,7 @@ class App extends Component {
     this.stopSearchPending = this.stopSearchPending.bind(this);
     this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
     this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
+    this.toggleLogPanels = this.toggleLogPanels.bind(this);
   }
   
   // Logs -->
@@ -87,6 +88,16 @@ class App extends Component {
     return body;
   };
 
+  // Navigation -->
+  toggleLogPanels(activeLogPanelIndex) {
+      let composedPanels = Array.from(this.state.logPanels);
+      composedPanels.forEach((panel) => {
+        panel.active = false
+      })
+      composedPanels[activeLogPanelIndex].active = true;
+      this.setState({ logPanels: composedPanels });
+  }
+
   // Lifecycle -->
   componentDidMount() {
     this.getEnvironmentDetails()
@@ -109,6 +120,7 @@ class App extends Component {
           appName={this.state.appName}
           companyName={this.state.companyName}
           logPanels={this.state.logPanels}
+          toggleLogPanels={this.toggleLogPanels}
         />
         <section className="logs-stage">
             { activeLogPanelFound
