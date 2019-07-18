@@ -128,9 +128,9 @@ class App extends Component {
               : null
             }
 
-            <SearchLogs />
+            <SearchLogs activeLogGroup={activeLogPanelFound ? activeLogPanel.name : null} />
             <section className="logs-browser">
-              <h3>Most Recent Logs:</h3>
+              <h3>Most Recent { activeLogPanelFound ? activeLogPanel.name : null} Logs:</h3>
               { logsAvailable && this.state.searchMeta
                 ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} searchStartTime={this.state.searchMeta.searchStartTime} />
                 : null
