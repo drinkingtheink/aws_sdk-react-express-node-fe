@@ -29,7 +29,7 @@ const EnvironmentDisplay = (props) => {
             key={panel.name}
             className={`sidenav-item ${panel.active ? 'active' : ''}`}
           >            
-            { panel.name }
+            { panel.name } { panel.active ? <i class="fas fa-chevron-right"></i> : null }
           </article>
         ))}
       </nav>

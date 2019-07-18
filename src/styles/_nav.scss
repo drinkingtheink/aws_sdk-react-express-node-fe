@@ -17,15 +17,26 @@
 			cursor: pointer;
 			color: $blue1;
 			opacity: 1;
+			padding-right: 2rem;
 		}
 
 		&.active {
 			color: $blue1;
 			opacity: 1;
 
+			i {
+				color: $blue2;
+				margin-left: .25rem;
+			}
+
 			&:hover {
 				background: transparent;
+				padding-right: 1rem;
 			}
+		}
+
+		i {
+			color: transparent;
 		}
 	}
 }
