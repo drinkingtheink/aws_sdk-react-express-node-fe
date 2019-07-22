@@ -15,6 +15,8 @@ class EnvironmentDisplay extends Component {
   }
 
   render() {
+    let appName = this.props.appName || 'Log System';
+
     return (
       <div className="environment-display">
         <img 
@@ -25,9 +27,9 @@ class EnvironmentDisplay extends Component {
 
         <h3 className="todays-date"><Moment date={ today } format="MMMM Do YYYY" /></h3>
 
-        {this.props.appName && this.props.companyName &&
+        {appName && this.props.companyName &&
           <section className="function-description">
-            <h3 className="function-name">{ this.props.appName }</h3>
+            <h3 className="function-name">{ appName }</h3>
             <h4 className="function-attribution">for { this.props.companyName }</h4>
           </section>
         }
