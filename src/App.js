@@ -11,6 +11,7 @@ import StickyHeader from './components/StickyHeader';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.logsStage = React.createRef();
     this.state = {
       logs: null,
       error: null,
@@ -25,16 +26,20 @@ class App extends Component {
     this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
     this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
     this.toggleLogPanels = this.toggleLogPanels.bind(this);
+    this.setUserFeedback = this.setUserFeedback.bind(this);
+    this.clearUserFeedback = this.clearUserFeedback.bind(this);
+    this.scrollToTopOfLogsStage = this.scrollToTopOfLogsStage.bind(this);
   }
   
   // Logs -->
   getMostRecentLogs = async () => {
+    this.clearUserFeedback();
     this.startSearchPending();
     const response = await fetch('/get-most-recent-logs');
     const body = await response.json();
 
     if (body.hasOwnProperty("error")) {
-      alert(`WE'VE GOT AN ERROR >>> ${JSON.stringify(body)}`);
+      this.setUserFeedback(body);
     } 
 
     return body;
@@ -43,7 +48,7 @@ class App extends Component {
   digestMostRecentLogsResult(searchResults) {
     let logMeta = searchResults.meta || {};
     let logGroup = searchResults.payload || [];
-    let logsFound = logGroup !== undefined;
+    let logsFound = logGroup !== undefined && logGroup.length && logGroup.length > 0;
 
     if (logsFound) {
       this.handleLogsFoundSuccessfully(logGroup, logMeta);
@@ -68,6 +73,18 @@ class App extends Component {
 
   stopSearchPending() {
     this.setState({ searchPending: false });
+  }
+
+  setUserFeedback(message) {
+    this.setState({ userFeedback: message });
+  }
+
+  clearUserFeedback() {
+    this.setState({ userFeedback: null });
+  }
+
+  scrollToTopOfLogsStage() {
+    this.logsStage.current.scrollTop = 0;
   }
 
   // Environment Details -->
@@ -122,9 +139,15 @@ class App extends Component {
           logPanels={this.state.logPanels}
           toggleLogPanels={this.toggleLogPanels}
         />
-        <section className="logs-stage">
+        <section 
+          ref={this.logsStage}
+          className="logs-stage"
+        >
             { activeLogPanelFound
-              ? <StickyHeader activeLogPanel={activeLogPanel} />
+              ? <StickyHeader 
+                  activeLogPanel={activeLogPanel} 
+                  scrollToTop={this.scrollToTopOfLogsStage}
+                />
               : null
             }
 

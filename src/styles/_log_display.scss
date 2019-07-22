@@ -1,3 +1,7 @@
+.logs-stage {
+	scroll-behavior: smooth;
+}
+
 .log-event {
 	@include appBoxShadow();
 	background-color: white;

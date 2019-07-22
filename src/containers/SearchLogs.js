@@ -109,7 +109,7 @@ class SearchLogs extends Component {
     return (
       <section className="search-logs">
         <main className="layout-panel">
-          <h3>Search { this.props.activeLogGroup ? this.props.activeLogGroup : null } Logs:</h3>
+          <h3>Search <strong>{ this.props.activeLogGroup ? this.props.activeLogGroup : null }</strong> Logs:</h3>
           <form id="log-search-form">
             <input 
               className="logs-search-input" 
