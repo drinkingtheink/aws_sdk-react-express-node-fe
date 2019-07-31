@@ -18,11 +18,10 @@ class LogStream extends Component {
     this.clearUserFeedback = this.clearUserFeedback.bind(this);
   }
 
-  getMostRecentLogs = async (logGroup) => {
-    alert(`LETS GET EM ++++++++++++ ${this.props.group.logGroupUrl}`);
+  getMostRecentLogs = async () => {
     this.clearUserFeedback();
     this.startSearchPending();
-    const response = await fetch('/get-most-recent-logs');
+    const response = await fetch(`/get-most-recent-logs?path=${this.props.group.logGroupUrl}`);
     const body = await response.json();
 
     if (body.hasOwnProperty("error")) {

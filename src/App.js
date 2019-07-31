@@ -3,7 +3,6 @@ import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
 import SearchLogs from './containers/SearchLogs';
 import LogStream from './containers/LogStream';
-import InProcessDisplay from './components/InProcessDisplay';
 import UserFeedback from './components/UserFeedback';
 import StickyHeader from './components/StickyHeader';
 
