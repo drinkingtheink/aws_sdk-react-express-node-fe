@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './App.scss';
 import EnvironmentDisplay from './components/EnvironmentDisplay';
 import SearchLogs from './containers/SearchLogs';
-import LogStream from './components/LogStream';
+import LogStream from './containers/LogStream';
 import InProcessDisplay from './components/InProcessDisplay';
 import UserFeedback from './components/UserFeedback';
-import LogsMetaDisplay from './components/LogsMetaDisplay';
 import StickyHeader from './components/StickyHeader';
 
 class App extends Component {
@@ -18,53 +17,35 @@ class App extends Component {
       searchPending: false,
       searchMeta: null,
       userFeedback: '',
-      logPanels: [],
+      logGroups: [],
       appName: null,
       companyName: null
     };
     this.stopSearchPending = this.stopSearchPending.bind(this);
-    this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
-    this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
-    this.toggleLogPanels = this.toggleLogPanels.bind(this);
+    this.toggleLogGroups = this.toggleLogGroups.bind(this);
     this.setUserFeedback = this.setUserFeedback.bind(this);
     this.clearUserFeedback = this.clearUserFeedback.bind(this);
     this.scrollToTopOfLogsStage = this.scrollToTopOfLogsStage.bind(this);
+    this.digestLogMeta = this.digestLogMeta.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
   
   // Logs -->
-  getMostRecentLogs = async () => {
+  getLogMeta = async () => {
     this.clearUserFeedback();
     this.startSearchPending();
-    const response = await fetch('/get-most-recent-logs');
+    const response = await fetch('/get-log-meta');
     const body = await response.json();
 
     if (body.hasOwnProperty("error")) {
-      this.setUserFeedback(body);
+      this.setUserFeedback(body.message);
     } 
 
     return body;
   };
 
-  digestMostRecentLogsResult(searchResults) {
-    let logMeta = searchResults.meta || {};
-    let logGroup = searchResults.payload || [];
-    let logsFound = logGroup !== undefined && logGroup.length && logGroup.length > 0;
-
-    if (logsFound) {
-      this.handleLogsFoundSuccessfully(logGroup, logMeta);
-    } else {
-      this.handleNoLogsFound();
-    }
-  }
-
-  handleLogsFoundSuccessfully(logGroup, logMeta) {
-    this.setState({ logs: logGroup, searchMeta: logMeta });
-    this.stopSearchPending();
-  }
-
-  handleNoLogsFound() {
-    this.setState({ userFeedback: 'No recent logs found.', searchPending: false });
-    this.stopSearchPending();
+  digestLogMeta(logMeta) {
+    this.setState({ logGroups: logMeta.logGroups });
   }
 
   startSearchPending() {
@@ -87,6 +68,10 @@ class App extends Component {
     this.logsStage.current.scrollTop = 0;
   }
 
+  getRandomString() {
+    return Math.random().toString(20).substring(2, 15) + Math.random().toString(20).substring(2, 15);
+  }
+
   // Environment Details -->
   getEnvironmentDetails = async () => {
     const response = await fetch('/get-env');
@@ -106,74 +91,60 @@ class App extends Component {
   };
 
   // Navigation -->
-  toggleLogPanels(activeLogPanelIndex) {
-      let composedPanels = Array.from(this.state.logPanels);
-      composedPanels.forEach((panel) => {
+  toggleLogGroups(activeLogPanelIndex) {
+      let composedGroups = Array.from(this.state.logGroups);
+      composedGroups.forEach((panel) => {
         panel.active = false
       })
-      composedPanels[activeLogPanelIndex].active = true;
-      this.setState({ logPanels: composedPanels });
+      composedGroups[activeLogPanelIndex].active = true;
+      this.setState({ logGroups: composedGroups });
   }
 
   // Lifecycle -->
   componentDidMount() {
     this.getEnvironmentDetails()
-      .then(res => this.setState({ appName: res.app_name, companyName: res.company_name, logPanels: res.processes }))
+      .then(res => this.setState({ appName: res.app_name, companyName: res.company_name, logGroups: res.processes }))
       .catch(err => console.log(err));
-
-    this.getMostRecentLogs()
-      .then(body => this.digestMostRecentLogsResult(body))
+    
+    this.getLogMeta()
+      .then(body => this.digestLogMeta(body))
       .catch(err => console.log(err));
+    
   }
 
   render() {
-    const logsAvailable = this.state.logs && this.state.logs.length > 0;
-    const activeLogPanel = this.state.logPanels.find(function(panel) {return panel.active;});
-    const activeLogPanelFound = !!(activeLogPanel);
-
     return (
       <main className="App">
         <EnvironmentDisplay 
           appName={this.state.appName}
           companyName={this.state.companyName}
-          logPanels={this.state.logPanels}
-          toggleLogPanels={this.toggleLogPanels}
+          logGroups={this.state.logGroups}
+          toggleLogGroups={this.toggleLogGroups}
         />
         <section 
           ref={this.logsStage}
           className="logs-stage"
         >
-            { activeLogPanelFound
-              ? <StickyHeader 
-                  activeLogPanel={activeLogPanel} 
-                  scrollToTop={this.scrollToTopOfLogsStage}
-                />
-              : null
-            }
+        <StickyHeader scrollToTop={this.scrollToTopOfLogsStage} />
 
-            <SearchLogs activeLogGroup={activeLogPanelFound ? activeLogPanel.name : null} />
-            <section className="logs-browser">
-              <h3>Most Recent { activeLogPanelFound ? activeLogPanel.name : null} Logs:</h3>
-              { logsAvailable && this.state.searchMeta
-                ? <LogsMetaDisplay logCount={this.state.searchMeta.logCount} searchStartTime={this.state.searchMeta.searchStartTime} />
-                : null
-              }
-              <section className="recent-log-display">
-                { this.state.searchPending
-                  ? <InProcessDisplay />
-                  : null
-                }
-
-                { logsAvailable
-                  ? <LogStream logs={this.state.logs} />
-                  : null
-                }
-              </section>
-              { this.state.userFeedback
-                ? <UserFeedback message={this.state.userFeedback} />
-                : null
-              }
-            </section>
+        <SearchLogs />
+        
+        <section className="logs-browser">
+          <h3>Most Recent Logs:</h3>
+         
+          <section className="recent-log-display">
+            {this.state.logGroups.map((group, index) => (
+              <LogStream
+                key={this.getRandomString()}
+                group={group}
+              />
+            ))}
+          </section>
+          { this.state.userFeedback
+            ? <UserFeedback message={this.state.userFeedback} />
+            : null
+          }
+        </section>
         </section>
       </main>
     );

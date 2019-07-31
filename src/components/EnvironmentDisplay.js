@@ -7,11 +7,11 @@ const today = new Date();
 class EnvironmentDisplay extends Component {
   constructor(props) {
     super(props);
-    this.toggleLogPanel = this.toggleLogPanel.bind(this);
+    this.toggleLogGroup = this.toggleLogGroup.bind(this);
   }
 
-  toggleLogPanel(logPanelIdex) {
-    this.props.toggleLogPanels(logPanelIdex);
+  toggleLogGroup(logGroupIdex) {
+    this.props.toggleLogGroups(logGroupIdex);
   }
 
   render() {
@@ -36,13 +36,13 @@ class EnvironmentDisplay extends Component {
 
         <nav className="cls-navigation">
          <h4>Monitoring:</h4>
-          {this.props.logPanels.map((panel, index) => (
+          {this.props.logGroups.map((group, index) => (
             <div 
-              key={panel.name}
-              className={`sidenav-item ${panel.active ? 'active' : ''}`}
-              onClick={() => this.toggleLogPanel(index)}
+              key={group.logGroupUrl}
+              className={`sidenav-item ${group.active ? 'active' : ''}`}
+              onClick={() => this.toggleLogGroup(index)}
             >            
-              { panel.name } { panel.active ? <i className="fas fa-chevron-right"></i> : null }
+              { group.logGroupTitle } { group.active ? <i className="fas fa-chevron-right"></i> : null }
             </div>
           ))}
         </nav>
