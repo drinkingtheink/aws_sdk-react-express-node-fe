@@ -7,7 +7,6 @@ const StickyHeader = (props) => {
 
 	return (
 		<section className="log-group-sticky-header"> 
-			<span className="log-group-sticky-header-text">Log Group:</span>
 			<button 
 				className="cls-action small"
 				onClick={scrollToTop}
