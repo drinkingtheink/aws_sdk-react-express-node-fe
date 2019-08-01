@@ -96,11 +96,6 @@ class LogStream extends Component {
         <h4 className="log-group-title">{this.props.group.logGroupTitle ? this.props.group.logGroupTitle : 'Log Stream'}</h4>
         <LogsMetaDisplay logCount={logCount} />
 
-        {!this.state.logs 
-          ? 'We got logs!!!!'
-          : 'Looking for logs...'
-        }
-
         {this.state.searchPending
           ? <InProcessDisplay />
           : null
