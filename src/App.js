@@ -112,6 +112,10 @@ class App extends Component {
   }
 
   render() {
+    let activeLogGroup = this.state.logGroups && this.state.logGroups.length > 0 ? this.state.logGroups.find(group => group.active ) : null;
+    let activeGroupFound = !!(activeLogGroup);
+    let safeActiveGroupPath = activeGroupFound ? activeLogGroup.logGroupUrl : null;
+
     return (
       <main className="App">
         <EnvironmentDisplay 
@@ -126,7 +130,7 @@ class App extends Component {
         >
         <StickyHeader scrollToTop={this.scrollToTopOfLogsStage} />
 
-        <SearchLogs />
+        <SearchLogs logGroupPath={safeActiveGroupPath} />
         
         <section className="logs-browser">
           <h3>Most Recent Logs:</h3>
@@ -134,7 +138,7 @@ class App extends Component {
           <section className="recent-log-display">
             {this.state.logGroups.map((group, index) => (
               <LogStream
-                key={this.getRandomString()}
+                key={`log-group-${index}`}
                 group={group}
               />
             ))}

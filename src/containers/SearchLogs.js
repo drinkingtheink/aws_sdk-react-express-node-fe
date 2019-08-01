@@ -49,12 +49,13 @@ class SearchLogs extends Component {
 
   searchLogs = async () => {
     let readyToSearch = this.state.searchTerm && this.state.searchTerm.length > 1;
+    let safeLogGroupPath = this.props.logGroupPath || '';
 
     if (readyToSearch) {
       this.setState({ searchPending: true, results: null});
       const searchTerm = this.state.searchTerm || null;
       const encodedSearchTerm = encodeURI(searchTerm);
-      const response = await fetch(`/search-logs/${encodedSearchTerm}`);
+      const response = await fetch(`/search-logs/${encodedSearchTerm}?path=${safeLogGroupPath}`);
       const body = await response.json();
 
       if (body.hasOwnProperty("error")) {

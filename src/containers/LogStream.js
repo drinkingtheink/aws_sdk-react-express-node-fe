@@ -1,27 +1,37 @@
 import React, { Component } from "react";
 import LogCard from '../components/LogCard';
 import LogsMetaDisplay from '../components/LogsMetaDisplay';
-
+import InProcessDisplay from '../components/InProcessDisplay';
 
 class LogStream extends Component {
   constructor(props) {
     super(props);
     this.state = {
       logs: [],
+      searchMeta: null,
       searchPending: false,
       userFeedback: null
     };
     this.digestMostRecentLogsResult = this.digestMostRecentLogsResult.bind(this);
     this.handleLogsFoundSuccessfully = this.handleLogsFoundSuccessfully.bind(this);
     this.stopSearchPending = this.stopSearchPending.bind(this);
+    this.startSearchPending = this.startSearchPending.bind(this);
     this.setUserFeedback = this.setUserFeedback.bind(this);
     this.clearUserFeedback = this.clearUserFeedback.bind(this);
+    this.initGetLogs = this.initGetLogs.bind(this);
+  }
+
+  initGetLogs() {
+    this.getMostRecentLogs()
+      .then(body => this.digestMostRecentLogsResult(body))
+      .then(() => this.stopSearchPending())
+      .catch(err => console.log(err));
   }
 
   getMostRecentLogs = async () => {
     this.clearUserFeedback();
     this.startSearchPending();
-    const response = await fetch(`/get-most-recent-logs?path=${this.props.group.logGroupUrl}`);
+    const response = await fetch(`/get-most-recent-logs?path=${this.props.group.logGroupUrl.trim()}`);
     const body = await response.json();
 
     if (body.hasOwnProperty("error")) {
@@ -53,10 +63,6 @@ class LogStream extends Component {
     this.stopSearchPending();
   }
 
-  getRandomString() {
-    return Math.random().toString(20).substring(2, 15) + Math.random().toString(20).substring(2, 15);
-  }
-
   startSearchPending() {
     this.setState({ searchPending: true });
   }
@@ -74,26 +80,32 @@ class LogStream extends Component {
   }
 
   componentDidMount() {
-    // this.getMostRecentLogs()
-    //   .then(body => this.digestMostRecentLogsResult(body))
-    //   .catch(err => console.log(err));
+    if (this.state.logs.length === 0) {
+      this.initGetLogs();
+      this.startSearchPending()
+    } 
   }
 
   render() {
     return (
       <div className="log-stream layout-panel">
-        <h4>{this.props.group.logGroupTitle ? this.props.group.logGroupTitle : 'Log Stream'}</h4>
+        <h4 className="log-group-title">{this.props.group.logGroupTitle ? this.props.group.logGroupTitle : 'Log Stream'}</h4>
         <LogsMetaDisplay />
 
         {!this.state.logs 
           ? 'We got logs!!!!'
-          : <button onClick={this.getMostRecentLogs}>Get Most Recent Logs</button>
+          : 'Looking for logs...'
+        }
+
+        {this.state.searchPending
+          ? <InProcessDisplay />
+          : null
         }
 
         {this.state.logs.map((log, index) => (
 	        <LogCard
 	          log={ log }
-	          key={this.getRandomString()}
+	          key={ log.eventId }
 	        />
 	      ))}
       </div>

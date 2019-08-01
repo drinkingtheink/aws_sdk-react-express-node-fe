@@ -38,7 +38,7 @@ class EnvironmentDisplay extends Component {
          <h4>Monitoring:</h4>
           {this.props.logGroups.map((group, index) => (
             <div 
-              key={group.logGroupUrl}
+              key={`log-groups-nav-item-${index}`}
               className={`sidenav-item ${group.active ? 'active' : ''}`}
               onClick={() => this.toggleLogGroup(index)}
             >            

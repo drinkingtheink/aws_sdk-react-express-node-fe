@@ -77,3 +77,11 @@
 .timestamp-time-display {
 	display: block;
 }
+
+.log-group-title {
+	padding: .5rem 0;
+	margin: .5rem 0;
+	border: 1px solid $border;
+	border-right: none;
+	border-left: none;
+}
