@@ -116,6 +116,7 @@ class SearchLogs extends Component {
               className="logs-search-input" 
               onChange={this.onChange}
               ref={this.logSearchInput}
+              placeholder="Enter your search term here - capitalization matters"
             />
             <button 
               className="log-search-button cls-action"

@@ -16,6 +16,10 @@
 	display: inline;
 }
 
+::placeholder {
+  color: $gray;
+}
+
 .logs-search-input {
 	width: 35vw;
 
