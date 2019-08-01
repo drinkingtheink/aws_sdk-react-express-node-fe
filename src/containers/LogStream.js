@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LogCard from '../components/LogCard';
 import LogsMetaDisplay from '../components/LogsMetaDisplay';
 import InProcessDisplay from '../components/InProcessDisplay';
+import UserFeedback from '../components/UserFeedback';
 
 class LogStream extends Component {
   constructor(props) {
@@ -107,6 +108,11 @@ class LogStream extends Component {
 	          key={ log.eventId }
 	        />
 	      ))}
+
+        {this.state.userFeedback && !this.state.searchPending
+          ? <UserFeedback message={this.state.userFeedback} />
+          : null
+        }
       </div>
     );
   }
