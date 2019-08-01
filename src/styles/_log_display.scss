@@ -78,6 +78,12 @@
 	display: block;
 }
 
+.log-stream {
+	&.hide-panel {
+		display: none;
+	}
+}
+
 .log-group-title {
 	padding: .5rem 0;
 	margin: .5rem 0;

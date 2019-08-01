@@ -87,10 +87,14 @@ class LogStream extends Component {
   }
 
   render() {
+   let logsFound = this.state.logs && this.state.logs.length && this.state.logs.length > 0;
+   let logCount = logsFound ? this.state.logs.length : 0;
+   let safeDisplayFlag = !!(this.props.showLogStream) ? this.props.showLogStream : false;
+
     return (
-      <div className="log-stream layout-panel">
+      <div className={`log-stream layout-panel ${safeDisplayFlag ? 'display-panel' : 'hide-panel'}`}>
         <h4 className="log-group-title">{this.props.group.logGroupTitle ? this.props.group.logGroupTitle : 'Log Stream'}</h4>
-        <LogsMetaDisplay />
+        <LogsMetaDisplay logCount={logCount} />
 
         {!this.state.logs 
           ? 'We got logs!!!!'

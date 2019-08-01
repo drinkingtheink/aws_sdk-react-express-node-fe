@@ -55,7 +55,7 @@ class SearchLogs extends Component {
       this.setState({ searchPending: true, results: null});
       const searchTerm = this.state.searchTerm || null;
       const encodedSearchTerm = encodeURI(searchTerm);
-      const response = await fetch(`/search-logs/${encodedSearchTerm}?path=${safeLogGroupPath}`);
+      const response = await fetch(`/search-logs/${encodedSearchTerm}?path=${safeLogGroupPath.trim()}`);
       const body = await response.json();
 
       if (body.hasOwnProperty("error")) {
@@ -110,7 +110,7 @@ class SearchLogs extends Component {
     return (
       <section className="search-logs">
         <main className="layout-panel">
-          <h3>Search <strong>{ this.props.activeLogGroup ? this.props.activeLogGroup : null }</strong> Logs:</h3>
+          <h3>Search <strong>{ this.props.activeLogGroupTitle ? this.props.activeLogGroupTitle : null }</strong> Logs:</h3>
           <form id="log-search-form">
             <input 
               className="logs-search-input" 

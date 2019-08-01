@@ -80,12 +80,6 @@ class App extends Component {
       throw Error(body.message) 
     }
     
-    //  otherwise, compose nav items
-    body.processes.forEach((process) => {
-      process.active = false;
-    });
-    
-    body.processes[0].active = true;
     return body;
   };
 
@@ -115,6 +109,8 @@ class App extends Component {
     let activeLogGroup = this.state.logGroups && this.state.logGroups.length > 0 ? this.state.logGroups.find(group => group.active ) : null;
     let activeGroupFound = !!(activeLogGroup);
     let safeActiveGroupPath = activeGroupFound ? activeLogGroup.logGroupUrl : null;
+    let safeActiveLogGroupIndex = activeGroupFound ? this.state.logGroups.findIndex(group => group.active ) : 0;
+    let safeActiveGroupTitle = activeGroupFound ? activeLogGroup.logGroupTitle : null;
 
     return (
       <main className="App">
@@ -130,16 +126,18 @@ class App extends Component {
         >
         <StickyHeader scrollToTop={this.scrollToTopOfLogsStage} />
 
-        <SearchLogs logGroupPath={safeActiveGroupPath} />
+        <SearchLogs logGroupPath={safeActiveGroupPath} activeLogGroupTitle={safeActiveGroupTitle}/>
         
         <section className="logs-browser">
           <h3>Most Recent Logs:</h3>
          
           <section className="recent-log-display">
-            {this.state.logGroups.map((group, index) => (
+            {this.state.logGroups && this.state.logGroups.map((group, index) => (
               <LogStream
                 key={`log-group-${index}`}
                 group={group}
+                activeLogGroupIndex={safeActiveLogGroupIndex}
+                showLogStream={index === safeActiveLogGroupIndex}
               />
             ))}
           </section>

@@ -36,7 +36,7 @@ class EnvironmentDisplay extends Component {
 
         <nav className="cls-navigation">
          <h4>Monitoring:</h4>
-          {this.props.logGroups.map((group, index) => (
+          {this.props.logGroups && this.props.logGroups.map((group, index) => (
             <div 
               key={`log-groups-nav-item-${index}`}
               className={`sidenav-item ${group.active ? 'active' : ''}`}
