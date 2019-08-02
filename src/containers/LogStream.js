@@ -83,7 +83,7 @@ class LogStream extends Component {
   componentDidMount() {
     if (this.state.logs.length === 0) {
       this.initGetLogs();
-      this.startSearchPending()
+      this.startSearchPending();
     } 
   }
 
