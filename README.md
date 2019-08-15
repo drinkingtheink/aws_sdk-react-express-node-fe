@@ -1,4 +1,6 @@
-# D&B Configurable Log System - Front End
+# Configurable Log System - Front End
+
+### Front End for this application - [Configurable Log System](https://github.com/drinkingtheink/aws_sdk-react-express-node)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
