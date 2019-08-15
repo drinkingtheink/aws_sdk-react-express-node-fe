@@ -1,0 +1,34 @@
+.search-logs {
+	padding: 1rem 0;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid $border;
+
+	@media screen and (max-width: 1000px) {
+	  border-top: 1px solid $border;
+	}
+
+	.in-process-wrapper {
+		margin-top: 1rem;
+	}
+}
+
+.logs-search-form {
+	display: inline;
+}
+
+::placeholder {
+  color: $gray;
+}
+
+.logs-search-input {
+	width: 35vw;
+
+	@media screen and (max-width: 1000px) {
+	  width: 90%;
+	  margin-bottom: 1rem;
+	}
+}
+
+.log-search-button {
+	margin-left: .5rem;
+}

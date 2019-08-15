@@ -1,0 +1,42 @@
+.cls-navigation {
+	margin-top: 1rem;
+
+	.sidenav-item {
+		padding: 1rem 1rem 1rem 0;
+		border-bottom: 1px solid $border;
+		text-align: right;
+		text-transform: uppercase;
+		color: $blue2;
+		font-weight: 600;
+		font-size: 1.25rem;
+		transition: all .2s;
+		opacity: .7;
+
+		&:hover {
+			background: $gray_light;
+			cursor: pointer;
+			color: $blue1;
+			opacity: 1;
+			padding-right: 2rem;
+		}
+
+		&.active {
+			color: $blue1;
+			opacity: 1;
+
+			i {
+				color: $blue2;
+				margin-left: .25rem;
+			}
+
+			&:hover {
+				background: transparent;
+				padding-right: 1rem;
+			}
+		}
+
+		i {
+			color: transparent;
+		}
+	}
+}

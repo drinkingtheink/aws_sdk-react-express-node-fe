@@ -1,0 +1,50 @@
+.environment-display {
+	@include appBoxShadow();
+	padding: 1rem;
+	background-color: rgba(white, .8);
+	margin-right: 2rem;
+	border: 1px solid $border;
+	height: 100vh;
+
+	.dnb_logo {
+		max-width: 65%;
+
+		@media screen and (max-width: $small_screen) {
+		  width: 25%;
+		}
+	}
+
+	.section-label {
+		margin: 0;
+	}
+
+	.function-attribution,
+	.function-name {
+		margin: 0;
+	}
+
+	.function-name {
+		color: $gray_dark;
+		padding-top: .5rem;
+		font-size: 1.75em;
+		margin-bottom: -.25rem;
+	}
+
+	.function-attribution {
+		color: $gray_dark;
+		font-size: 1.25em;
+		opacity: .5;
+	}
+
+	.todays-date {
+		font-size: $smaller_font;
+		border-top: 1px solid $border;
+		border-bottom: 1px solid $border;
+		margin: .5rem 0;
+		padding: .5rem 0;
+	}
+
+	.section-label {
+		font-size: $smaller_font;
+	}
+}

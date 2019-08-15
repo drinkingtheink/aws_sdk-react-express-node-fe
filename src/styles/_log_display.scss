@@ -1,0 +1,93 @@
+.logs-stage {
+	scroll-behavior: smooth;
+}
+
+.log-event {
+	@include appBoxShadow();
+	background-color: white;
+	margin-bottom: .5rem;
+	position: relative;
+	display: flex;
+
+	@media screen and (max-width: $small_screen) {
+	  width: 95%;
+	}
+}
+
+.log-event-timestamp {
+	position: relative;
+	color: $blue3;
+	padding: 1rem 1rem 1rem 2rem;
+	margin: 0;
+	font-weight: 600;
+	width: 12em;
+	border-left: 3px solid $blue2;
+}
+
+.log-event-timestamp__relative {
+	text-transform: uppercase;
+	display: block;
+	margin: .5rem 0;
+	padding-bottom: .5rem;
+	color: $blue2;
+	border-bottom: 1px solid rgba($blue2, .25);
+}
+
+.log-event-meta {
+	width: 75%;
+	padding: 0 .5rem 1rem .5rem;
+
+	p {
+		font-size: .8rem;
+	}
+}
+
+.log-event-message {
+	display: inline-block;
+	padding: .5rem;
+	border-radius: 4px;
+	background-color: $gray_light;
+	border-left: 5px solid $gray;
+	font-size: 1.25rem !important;
+	margin-bottom: 0;
+	white-space: pre-wrap;
+	width: 95%;
+}
+
+.secondary-field {
+	opacity: .8;
+}
+
+@media screen and (max-width: $small_screen) {
+  .log-stream-display,
+  .log-id-display {
+  	display: none;
+  }
+}
+
+.logs-meta-display {
+	display: flex;
+
+	.meta-field {
+		margin-right: .25rem;
+		color: $blue1;
+	}
+}
+
+.timestamp-time-display {
+	display: block;
+}
+
+.log-stream {
+	&.hide-panel {
+		display: none;
+	}
+}
+
+.log-group-title {
+	padding: .5rem 0;
+	margin: .5rem 0;
+	border: 1px solid $border;
+	border-right: none;
+	border-left: none;
+}

@@ -1,0 +1,26 @@
+.log-group-sticky-header {
+	@include appBoxShadow();
+	text-align: center;
+	background: $blue3;
+	color: white;
+	padding: 1rem;
+	width: auto;
+	font-weight: bold;
+	font-size: 1em;
+	max-width: 35vw;
+	margin: 0 auto;
+	text-transform: uppercase;
+	border-radius: 0 0 5px 5px;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+
+	@media screen and (max-width: $small_screen) {
+	  display: none;
+	}
+
+	.log-group-sticky-header-text {
+		display: inline-block;
+		margin-right: .5rem;
+	}
+}

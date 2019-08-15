@@ -1,0 +1,67 @@
+@import './styles/_breakpoints';
+@import './styles/_mixins';
+@import './styles/_base';
+@import './styles/_nav';
+@import './styles/_buttons';
+@import './styles/_forms';
+@import './styles/_search_logs';
+@import './styles/_log_display';
+@import './styles/_environment_display';
+@import './styles/_loading_animation';
+@import './styles/_user_feedback';
+@import './styles/_log_group_sticky_header';
+
+/** Structural Styles for Main Layout **/
+
+$scrollable-section-width: 80vw;
+$sidepanel-width: 100 - $scrollable-section-width;
+
+body, 
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
+.App {
+	border-top: 3px solid $blue3;
+	display: flex;
+	flex: 1;
+
+	@media screen and (max-width: $small_screen) {
+	  display: block;
+	}
+
+	.environment-display {
+		width: $sidepanel-width;
+
+		@media screen and (max-width: $small_screen) {
+		  width: 100%;
+		  height: auto;
+		}
+	}
+
+	.logs-stage {
+		height: 100vh;
+  		display: flex;
+  		flex-direction: column;
+  		width: $scrollable-section-width;
+  		overflow-y: auto;
+
+  		@media screen and (max-width: $small_screen) {
+		  width: 100%;
+		  padding: 0 1rem;
+		}
+	}
+
+	.log-stream {
+		flex: 2;
+	}
+
+	.layout-panel {
+		max-width: 65vw;
+
+		@media screen and (max-width: $medium_screen) {
+		  max-width: 95%;
+		}
+	}
+}
