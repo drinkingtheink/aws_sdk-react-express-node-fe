@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
-import logo from '../dnb_wordmark.svg';
 
 const today = new Date();
 
@@ -19,13 +18,9 @@ class EnvironmentDisplay extends Component {
 
     return (
       <div className="environment-display">
-        <img 
-          src={ logo } 
-          className="dnb_logo" 
-          alt="Dun and Bradstreet" 
-        />
-
-        <h3 className="todays-date"><Moment date={ today } format="MMMM Do YYYY" /></h3>
+        <h3 className="todays-date">
+          <Moment date={ today } format="MMMM Do YYYY" />
+        </h3>
 
         {appName && this.props.companyName &&
           <section className="function-description">
